@@ -58,17 +58,17 @@ public class FormServlet extends HttpServlet {
             errores.add("Debe seleccionar al menos un idioma!");
         }
 
-        try (PrintWriter out = resp.getWriter()) {
-            out.println("<!DOCTYPE>");
-            out.println("<html>");
-            out.println("  <head>");
-            out.println("    <meta charset=\"UTF-8\">");
-            out.println("    <title>Registro formulario</title>");
-            out.println("  </head>");
-            out.println("  <body>");
-            out.println("    <h1>Registro formulario!</h1>");
-            out.println("    <ul>");
-            if (errores.isEmpty()) {
+        if (errores.isEmpty()) {
+            try (PrintWriter out = resp.getWriter()) {
+                out.println("<!DOCTYPE>");
+                out.println("<html>");
+                out.println("  <head>");
+                out.println("    <meta charset=\"UTF-8\">");
+                out.println("    <title>Registro formulario</title>");
+                out.println("  </head>");
+                out.println("  <body>");
+                out.println("    <h1>Registro formulario!</h1>");
+                out.println("    <ul>");
                 out.println("       <li>Username: " + username + "</li>");
                 out.println("       <li>Password: " + password + "</li>");
                 out.println("       <li>Email: " + email + "</li>");
@@ -83,15 +83,23 @@ public class FormServlet extends HttpServlet {
                 out.println("       <li>Idioma: " + idioma + "</li>");
                 out.println("       <li>Habilitado: " + habilitar + "</li>");
                 out.println("       <li>Secreto: " + secreto + "</li>");
-            } else {
-                errores.forEach(error -> {
+                out.println("    </ul>");
+                out.println("  </body>");
+                out.println("</html>");
+            }
+        } else {
+                /*errores.forEach(error -> {
                     out.println("    <li>" + error + "</li>");
                 });
-                out.println("<p><a href=\"/webapp/index.html\">Volver</a></p>");
-            }
-            out.println("    </ul>");
-            out.println("  </body>");
-            out.println("</html>");
+                out.println("<p><a href=\"/webapp/index.jsp\">Volver</a></p>");*/
+
+            //setAttribute(String, Object) del request sirve para setear atributos al request de forma independientes a los parámetros recibidos, para pasar datos desde un servlet a un jsp o
+            //de un servlet a otro servlet, estos atributos son compartidos por los servlet o los jsp
+            req.setAttribute("errores", errores);
+            //Para poder redireccionar el request al jsp se utiliza el método getServletContext()
+            //.getRequestDispatcher("ruta del jsp"), "/index.jsp" es el index.jsp que se tiene, este se debe modificar a .jsp para que soporte código Java
+            //.forward(ServletRequest, ServletResponse) método que sirve para cargar el request y response al jsp
+            getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
         }
     }
 }

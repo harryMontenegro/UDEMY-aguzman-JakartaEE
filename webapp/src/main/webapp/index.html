@@ -2,44 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Hola Mundo Tomcat</title>
+    <title>Formulario de usuario</title>
 </head>
 <body>
-<h1>Hola mundo Tomcat</h1>
-<ul>
-    <li>
-        <a href="/webapp/parametros/url-get?saludo=Hola Andres">enviando parámetro saludo: /url-get?saludo=Hola Andres</a>
-    </li>
-    <li>
-        <a href="/webapp/parametros/url-get?saludo=Hola&nombre=Andres">/url-get?saludo=Hola&nombre=Andres</a>
-    </li>
-    <li>
-        <a href="/webapp/parametros/url-get?nombre=Andres">/url-get?nombre=Andres</a>
-    </li>
-    <li>
-        <a href="/webapp/parametros/url-get?saludo=Hola&nombre=Andres&codigo=12345">/url-get?saludo=Hola&nombre=Andres&codigo=12345</a>
-    </li>
-</ul>
+ <h3>Formulario de usuarios</h3>
+ <form action="/webapp/registro" method="post">
+    <div>
+        <label for="username">Usuario</label>
+        <div><input type="text" name="username" id="username"></div>
+    </div>
+     <div>
+         <label for="password">Password</label>
+         <div><input type="password" name="password" id="password"></div>
+     </div>
+     <div>
+         <label for="email">Email</label>
+         <div><input type="email" name="email" id="email"></div>
+     </div>
+     <div>
+         <div>
+             <input type="submit" value="Enviar">
+         </div>
+     </div>
+ </form>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

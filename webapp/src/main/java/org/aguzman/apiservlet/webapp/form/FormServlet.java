@@ -22,6 +22,9 @@ public class FormServlet extends HttpServlet {
         String pais = req.getParameter("pais");
         String[] lenguajes = req.getParameterValues("lenguajes");
         String[] roles = req.getParameterValues("roles");
+        String idioma = req.getParameter("idioma");
+        String habilitar = req.getParameter("habilitar");
+        String secreto = req.getParameter("secreto");
 
         try (PrintWriter out = resp.getWriter()) {
             out.println("<!DOCTYPE>");
@@ -44,6 +47,9 @@ public class FormServlet extends HttpServlet {
             Arrays.asList(roles).forEach(rol -> out.println("          <li>Rol: " + rol + "</li>"));
             out.println("       </ul></li>");
             out.println("       </li>");
+            out.println("       <li>Idioma: " + idioma + "</li>");
+            out.println("       <li>Habilitado: " + habilitar + "</li>");
+            out.println("       <li>Secreto: " + secreto + "</li>");
             out.println("    </ul>");
             out.println("  </body>");
             out.println("</html>");

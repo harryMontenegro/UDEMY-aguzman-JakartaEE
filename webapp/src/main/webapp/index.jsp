@@ -1,7 +1,7 @@
 <!-- Directivas que deben tener los .jsp para indicar el tipo de contenido y el encoding -->
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!-- las etiquetas < %@% > sirven para indicar alguna directiva -->
-<%@page import="java.util.List"%>
+<%@ page import="java.util.Map" %>
 
 <%
     //las etiquetas < %% > sirven para especificar o contener código Java, nótese que van sin el @, esto se le conoce como scriptlet.
@@ -9,7 +9,7 @@
 
     //request es un obj propio del jsp.
     //request.getAttribute(String) es un método que extrae algún atributo por nombre
-    List<String> errores = (List<String>) request.getAttribute("errores");//"errores" atributo pasado desde el servlet
+    Map<String, String> errores = (Map<String, String>) request.getAttribute("errores");//"errores" atributo pasado desde el servlet
 %>
 
 <!DOCTYPE html>
@@ -22,7 +22,7 @@
 <h3>Formulario de usuarios</h3>
 <%if (errores != null && errores.size() > 0) {%>
 <ul>
-    <% for (String error : errores) {%>
+    <% for (String error : errores.values()) {%>
     <!-- < %=error% > se le conoce como expresiones de jsp para imprimir en html-->
     <li><%=error%>
     </li>
@@ -33,14 +33,29 @@
     <div>
         <label for="username">Usuario</label>
         <div><input type="text" name="username" id="username"></div>
+        <%
+            if (errores != null && errores.containsKey("username")) {
+                out.println("<small style='color : red'>" + errores.get("username") + "</small>");
+            }
+        %>
     </div>
     <div>
         <label for="password">Password</label>
         <div><input type="password" name="password" id="password"></div>
+        <%
+            if (errores != null && errores.containsKey("password")) {
+                out.println("<small style='color : red'>" + errores.get("password") + "</small>");
+            }
+        %>
     </div>
     <div>
         <label for="email">Email</label>
         <div><input type="email" name="email" id="email"></div>
+        <%
+            if (errores != null && errores.containsKey("email")) {
+                out.println("<small style='color : red'>" + errores.get("email") + "</small>");
+            }
+        %>
     </div>
     <div>
         <label for="pais">Pais</label>
@@ -56,6 +71,11 @@
                 <option value="VE">Venezuela</option>
             </select>
         </div>
+        <%
+            if (errores != null && errores.containsKey("pais")) {
+                out.println("<small style='color : red'>" + errores.get("pais") + "</small>");
+            }
+        %>
     </div>
     <div>
         <label for="lenguajes">Lenguajes de programación</label>
@@ -69,6 +89,11 @@
                 <option value="react">React</option>
             </select>
         </div>
+        <%
+            if (errores != null && errores.containsKey("lenguajes")) {
+                out.println("<small style='color : red'>" + errores.get("lenguajes") + "</small>");
+            }
+        %>
     </div>
     <div>
         <label>Roles</label>
@@ -84,6 +109,11 @@
             <input type="checkbox" name="roles" value="ROLE_MODERATOR">
             <label>Moderador</label>
         </div>
+        <%
+            if (errores != null && errores.containsKey("roles")) {
+                out.println("<small style='color : red'>" + errores.get("roles") + "</small>");
+            }
+        %>
     </div>
     <div>
         <label>Idiomas</label>
@@ -100,6 +130,11 @@
             <label>Frances</label>
         </div>
     </div>
+    <%
+        if (errores != null && errores.containsKey("idioma")) {
+            out.println("<small style='color : red'>" + errores.get("idioma") + "</small>");
+        }
+    %>
     <div>
         <label for="habilitar">Habilitar</label>
         <div>

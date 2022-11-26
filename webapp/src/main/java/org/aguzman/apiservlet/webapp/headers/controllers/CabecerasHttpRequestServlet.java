@@ -1,4 +1,4 @@
-package org.aguzman.apiservlet.webapp.headers;
+package org.aguzman.apiservlet.webapp.headers.controllers;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
